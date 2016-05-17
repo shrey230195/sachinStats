@@ -24,7 +24,7 @@
      *
      */
     angular
-      .module('boilerplate')
+      .module('sachinStats')
       .factory('LocalStorage', [
         '$window', '$rootScope', LocalStorageService
       ]);
