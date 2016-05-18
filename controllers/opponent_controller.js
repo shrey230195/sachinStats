@@ -1,62 +1,78 @@
 angular.module('sachinStats')
 .controller('opponentController', ['$scope', '$state','dataFactory', function ($scope, $state,dataFactory) {
-  $scope.isFetched=false;
-  $scope.sachinData ;
-  $scope.pieData=[];
-  
+    $scope.isFetched=false;
+    $scope.pieData=[];
+    $scope.runs=[];
+    $scope.countries=[];
+    
+     $scope.showBattingStats=function(){
+        $state.go('home.opponent.batting');
+        
+    }
+    $scope.showBowlingStats=function(){
+        $state.go('home.opponent.bowling');
+        
+    }
+    
+     
+   
 
-  $scope.prepareGraphData=function(){
+    $scope.prepareGraphData=function(){
       
-       
-                angular.forEach($scope.sachinData,function(item,key){
+                angular.forEach($scope.countries,function(item,key){
                     var obj = {
-                    name: $scope.sachinData.opponent,
-                    y: $scope.sachinData.opposition.length
+                    name: $scope.countries[key],
+                    y: $scope.runs[key]
                   };
-                  $scope.pieData.push(obj);
+                  $scope.pieData.push(obj);// Sample data for pie chart
                 });
-                // Sample data for pie chart
-                   
-                  
+    };
 
-                  
-                
-                
-
-       };
     $scope.runsAgainstOpponent=function(parsedData){
-        var fiftyAndHundreds = parsedData.reduce(function (obj, el) {
-            let opp = el.opposition.slice(2),
-                s = parseInt(el.batting_score)
-
-            obj[opp] = obj[opp] || 0
-
-            if (s) {
-                obj[opp] += s
+        var oppWiseRunsObj = parsedData.reduce(function (obj, el) {
+            var countries = el.opposition.slice(2);
+            var runs = parseInt(el.batting_score);
+            
+            obj[countries] = obj[countries] || 0
+               
+            if (runs) {
+                obj[countries] += runs
             }
 
             return obj
         });
-        console.log(fiftyAndHundreds);
-    }
+        return oppWiseRunsObj;
+        
+    };
                 
-  $scope.getCsv = function(){
-    dataFactory.getData()
+    $scope.getCsv = function(){
+         dataFactory.getData()
                 .then(function(data){
-                    $scope.sachinData=Papa.parse(data.data.trim(), {
+                    var sachinData=Papa.parse(data.data.trim(), {
                                             header: true
                                         }).data;
-                    $scope.isFetched=true;
+                    $scope.isFetched=true;//to confirm that data is fetched and  can be used in directive
                     
-                    $scope.runsAgainstOpponent($scope.sachinData);
-                    
-                     
-      
+                    var opponent=$scope.runsAgainstOpponent(sachinData);
+                    var isCountry=false;
+                    angular.forEach(opponent,function(item,key){
+
+                        if(key=='Australia'){
+                            isCountry=true
+                        }
+                        if(isCountry){
+                            $scope.countries.push(key);
+                            $scope.runs.push(item);
+                        }
+                        
+                    });
+                    $scope.prepareGraphData();
+                
                 },function(error){
                   console.log(error);
                   return error;
                 });
-  };              
+    };              
 
   $scope.getCsv();
       

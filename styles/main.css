@@ -8,6 +8,7 @@ body{
 	border:2px solid #000;
 	height: 550px;
 	z-index: -9999;
+	width: 100%;
 	float: left;
 	-webkit-filter: blur(2.5px);
   -moz-filter: blur(2.5px);
@@ -38,6 +39,7 @@ body{
 	border-bottom: 1px solid #99998e;
 	height: 120px;
 	width: 100%;
+	cursor: pointer;
 	
 }
 .statsBox img,i{
@@ -62,5 +64,32 @@ body{
 .result-wrapper{
 	float: left;
 	height: 550px;
-	width: 85%;
+	width: 80%;
+	margin-left: 2%;
+}
+.opponent{
+
+	float: left;
+	width: 100%;
+	border-bottom: 1px solid #ccccbe;
+	-webkit-box-shadow:0 1px 3px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 3px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 3px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+
+}
+.opponent div{
+	padding-left: 15%;
+	border-right: 3px solid #ccccbe
+}
+.graph{
+	font-family: 'Trebuchet MS', 'Helvetica', 'sans-serif';
+	-webkit-box-shadow:0 1px 3px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 3px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 3px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    float: left;
+    width: 100%;
+    padding: 3%;
+    margin-top: 1%;
+    margin-left: -1%;
+
 }

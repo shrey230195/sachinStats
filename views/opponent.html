@@ -1,4 +1,14 @@
 <div ng-controller="opponentController">
-	<hc-pie-chart title="BATTING" data="pieData" fetched="isFetched">Placeholder for pie chart</hc-pie-chart>
-
+	<div class="row opponent">
+		<div class="col-md-6" ng-click="showBattingStats()" >
+			<h2>Runs</h2>
+		</div>
+		<div class="col-md-6" ng-click="showBowlingStats()">
+			<h2>wickets</h2>
+		</div>
+		
+	</div>
+	
+	<div ui-view="opponentBowlBat"  ></div>
+	
 </div>

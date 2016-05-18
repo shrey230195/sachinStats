@@ -1,14 +1,4 @@
-/**
- * 
- * AngularJS Boilerplate
- * @description           Description
- * @author                Jozef Butko // www.jozefbutko.com/resume
- * @url                   www.jozefbutko.com
- * @version               1.1.7
- * @date                  March 2015
- * @license               MIT
- * 
- */
+
 ;(function() {
 
 
@@ -70,6 +60,24 @@
     views: {
       'home': {
         templateUrl: "views/opponent.html"
+      }
+    }
+  })
+  .state('home.opponent.batting',{
+    url:'/batting',
+    controller:'opponentController',
+    views:{
+      'opponentBowlBat':{
+        templateUrl:"views/opponent_runs.html"
+      }
+    }
+  })
+  .state('home.opponent.bowling',{
+    url:'/bowling',
+    controller:'opponentController',
+    views:{
+      'opponentBowlBat':{
+        templateUrl:"views/opponent_wickets.html"
       }
     }
   });
