@@ -1,14 +1,15 @@
 angular.module('sachinStats')
 .controller('battingController', ['$scope', '$state','dataFactory' ,function ($scope, $state,dataFactory) {
   
-  
+  $scope.isFetched=false;
   $scope.sachinData = [];
-  $scope.processData = function(allText) {
+  $scope.pieData=[];
+  /*$scope.processData = function(allText) {
                     // split content based on new line
                     var allTextLines = allText.split(/\r\n|\n/);
                     //console.log('--->',allTextLines);
                     var headers = allTextLines[0].split(',');
-                    $scope.lines = [];
+                    var lines = [];
 
                     for ( var i = 0; i < allTextLines.length; i++) {
                         // split content based on comma
@@ -18,34 +19,24 @@ angular.module('sachinStats')
                             for ( var j = 0; j < headers.length; j++) {
                                 tarr.push(data[j]);
                             }
-                            $scope.lines.push(tarr);
+                            lines.push(tarr);
                         }
                     }
                     //console.log(lines);
                     
+                    return lines;
                     
-                    return headers;
-                };
+                    
+                };*/
 
-
-  
-
-  $scope.viewLoaded = false;
-
-
-  
-
-  $scope.$on('viewContentLoaded',function(){
-    if(!$scope.viewLoaded){
-      console.log("state change hua at batting");
-      //$scope.viewContentLoaded();
-      
+  $scope.prepareGraphData=function(){
+    console.log($scope.sachinData[0]);
        $scope.chartOptions = {
                     title: {
                         text: 'Temperature data'
                     },
                     xAxis: {
-                        categories: $scope.something
+                        categories: $scope.sachinData[0]
                     },
 
                     series: [{
@@ -54,32 +45,33 @@ angular.module('sachinStats')
                 };
 
                 // Sample data for pie chart
-                $scope.pieData = [{
-                        name: "Microsoft Internet Explorer",
-                        y: 56.33
-                    }, {
-                        name: "Chrome",
-                        y: 24.03,
-                        sliced: true,
-                        selected: true
-                    }, {
-                        name: "Firefox",
-                        y: 10.38
-                    }, {
-                        name: "Safari",
-                        y: 4.77
-                    }, {
-                        name: "Opera",
-                        y: 0.91
-                    }, {
-                        name: "Proprietary or Undetectable",
-                        y: 0.2
-                }];
+                for(heading in $scope.sachinData[0]){
+                  var obj = {
+                    name: $scope.sachinData[0][heading],
+                    y:$scope.sachinData[1][heading]
+                  };
+                  console.log(obj);
+                }
 
-        
+       };
+                
+  $scope.getCsv = function(){
+    dataFactory.getData()
+                .then(function(result){
+                    $scope.sachinData=dataFactory.processData(result.data);
+                    
+                    $scope.isFetched=true;
+                    
+                     $scope.prepareGraphData(); 
+      
+                },function(error){
+                  console.log(error);
+                  return error;
+                });
+  };              
+
+  $scope.getCsv();
       
       $scope.viewLoaded = true;
-    }
-  });
   
 }]);
