@@ -103,3 +103,16 @@ body{
     margin-left: -1%;
 
 }
+.source{
+	float: right;
+	width: auto;
+
+}
+.source img{
+	float: left;
+	height: 50px;
+	width: 50px;
+}
+.source h3{
+	float: left;
+}
