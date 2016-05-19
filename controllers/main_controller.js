@@ -22,8 +22,8 @@
     $state.go('home.batting');
     
   };
-  $scope.goToWinLossStats = function(){
-    $state.go('home.winLoss');
+  $scope.goToRunsPerYearStats = function(){
+    $state.go('home.runsPerYear');
     
   };
   $scope.goToOpponentStats = function(){

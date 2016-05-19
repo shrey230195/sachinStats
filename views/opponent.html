@@ -8,6 +8,12 @@
 		</div>
 		
 	</div>
+	<div class="graph" ng-controller="opponentController" ng-if="isVisited">
+		<hc-pie-chart title="runs Vs Opponents" data="opponentStats" fetched="isFetched" >Placeholder for pie chart</hc-pie-chart>
+		 
+
+
+	</div>
 	
 	<div ui-view="opponentBowlBat"  ></div>
 	

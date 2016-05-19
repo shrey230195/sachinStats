@@ -1,5 +1,21 @@
+
 <div ng-controller="centuriesController">
-	<div id="centuriesStats" >
-		<hc-chart options="chartOptions" fetched="isFetched">Placeholder for generic chart</hc-chart>	
+	<div class="row opponent">
+		<div class="col-md-6" ng-click="showHalfCenturies()" >
+			<h2>50</h2>
+		</div>
+		<div class="col-md-6" ng-click="showFullCenturies()">
+			<h2>100</h2>
+		</div>
+		
 	</div>
+	<div class="graph" ng-controller="centuriesController" ng-if="isVisited">
+		<hc-chart category="years" fetched="isFetched" heading="100" data="yearWiseCenturies">Placeholder for generic chart</hc-chart>
+		 
+
+
+	</div>
+	
+	<div ui-view="centuries" ></div>
+	
 </div>

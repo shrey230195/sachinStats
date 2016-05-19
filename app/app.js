@@ -36,12 +36,12 @@
       }
     }
   })
-  .state('home.winLoss', {
+  .state('home.runsPerYear', {
     url: '/winLoss',
-    controller: 'winLossController',
+    controller: 'runsPerController',
     views: {
       'home': {
-        templateUrl: "views/winLoss.html"
+        templateUrl: "views/runs_per_year.html"
       }
     }
   })
@@ -78,6 +78,40 @@
     views:{
       'opponentBowlBat':{
         templateUrl:"views/opponent_wickets.html"
+      }
+    }
+  }).state('home.centuries.half',{
+    url:'/50',
+    controller:'centuriesController',
+    views:{
+      'centuries':{
+        templateUrl:"views/half_centuries.html"
+      }
+    }
+  })
+  .state('home.centuries.full',{
+    url:'/100',
+    controller:'centuriesController',
+    views:{
+      'centuries':{
+        templateUrl:"views/full_centuries.html"
+      }
+    }
+  }).state('home.batting.first',{
+    url:'/first_innings',
+    controller:'battingController',
+    views:{
+      'batting':{
+        templateUrl:"views/batting_first.html"
+      }
+    }
+  })
+  .state('home.batting.second',{
+    url:'/second_innings',
+    controller:'battingController',
+    views:{
+      'batting':{
+        templateUrl:"views/batting_second.html"
       }
     }
   });

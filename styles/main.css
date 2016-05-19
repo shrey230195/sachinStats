@@ -10,11 +10,15 @@ body{
 	z-index: -9999;
 	width: 100%;
 	float: left;
-	-webkit-filter: blur(2.5px);
-  -moz-filter: blur(2.5px);
-  -o-filter: blur(2.5px);
-  -ms-filter: blur(2.5px);
-  filter: blur(2.5px);
+	
+}
+.sachin h1{
+	color: #fff;
+	font-family: 'Trebuchet MS', 'Helvetica', 'sans-serif';
+	margin:auto auto;
+	text-align: center;
+	font-size: 40px;
+	font-weight: bold;
 }
 .sidebar-heading{
 	height: 50px;
@@ -29,7 +33,8 @@ body{
 
 }
 .sidebar-heading h2{
-	margin-left: 30%;
+	margin:auto auto;
+	text-align: center;
 	
 }
 .statsBox{
@@ -48,8 +53,9 @@ body{
 
 }
 .statsBox h3{
+	text-align: center;
 	margin-top: 0px;
-	margin-left: 30%;
+	margin:auto auto;
 	font-family: 'Trebuchet MS', 'Helvetica', 'sans-serif';
 }
 
@@ -78,9 +84,13 @@ body{
 
 }
 .opponent div{
-	padding-left: 15%;
-	border-right: 3px solid #ccccbe
+	text-align: center;
+	margin:auto auto;
+	border-right: 3px solid #ccccbe;
+	cursor:pointer;
+	border-bottom: 1px solid #ccccbe;
 }
+
 .graph{
 	font-family: 'Trebuchet MS', 'Helvetica', 'sans-serif';
 	-webkit-box-shadow:0 1px 3px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;

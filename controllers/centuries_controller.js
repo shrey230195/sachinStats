@@ -1,29 +1,44 @@
 angular.module('sachinStats')
 .controller('centuriesController', ['$scope', '$state','dataFactory', function ($scope, $state,dataFactory) {
     $scope.isFetched=false;
-    $scope.chartOptions = {
-                    title: {
-                        text: 'Temperature data'
-                    },
-                    xAxis: {
-                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
-                            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                    },
+    $scope.years=[];
+    $scope.yearWiseCenturies=[];
+    $scope.yearWiseHalfCenturies=[];
+     $scope.showHalfCenturies=function(){
+        $state.go('home.centuries.half');
+        $scope.isVisited=false;
+    }
+    $scope.showFullCenturies=function(){
+        $state.go('home.centuries.full');
+        $scope.isVisited=false;
+    }
+    $scope.isVisited=true;
 
-                    series: [{
-                        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-                    }]
+    $scope.prepareGraphData=function(object){
+        var isYear=true;
+        angular.forEach(object,function(item,key){
+                            if(key=='2012'){
+                                isYear=false;
+                            }
+                            if(isYear){
+                                $scope.yearWiseCenturies.push(item[1]);
+                                $scope.yearWiseHalfCenturies.push(item[0]);
+                                $scope.years.push(key);
+                            }
+                            
+                        });
+
     };
     $scope.centuriesPerYear=function(parsedData){
         var centuriesPerYear = parsedData.reduce(function (obj, el) {
             var years = el.date.slice(-4);
             var runs = parseInt(el.batting_score);
             
-            obj[countries] = obj[countries] || [0,0]
+            obj[years] = obj[years] || [0,0]
                
-            if (50 <= score && score < 100) {
+            if (50 <= runs && runs < 100) {
                 obj[years][0] += 1
-            } else if (100 <= score) {
+            } else if (100 <= runs) {
                 obj[years][1] += 1
             }
 
@@ -41,8 +56,8 @@ angular.module('sachinStats')
                                         }).data;
                     $scope.isFetched=true;//to confirm that data is fetched and  can be used in directive
                     
-                    //$scope.prepareGraphData();
-                
+                    $scope.prepareGraphData($scope.centuriesPerYear(sachinData));
+                    
                 },function(error){
                   console.log(error);
                   return error;

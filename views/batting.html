@@ -1,7 +1,25 @@
-<div ng-controller="battingController">
-	<div id="battingStats">
-		<hc-chart options="chartOptions" fetched="isFetched">Batting average</hc-chart>	
-		<hc-pie-chart title="BATTING" data="pieData" fetched="isFetched">Placeholder for pie chart</hc-pie-chart>
-	</div>
 
+
+<div ng-controller="battingController">
+	<div class="row opponent">
+		<div class="col-md-12">
+			<h2>Batting Avg Per Innings</h2>
+		</div>
+		<div class="col-md-6" ng-click="showFirstInning()" >
+			<h2>first Inning</h2>
+		</div>
+		<div class="col-md-6" ng-click="showSecondInning()">
+			<h2>second Inning</h2>
+		</div>
+		
+	</div>
+	<div class="graph" ng-controller="battingController" ng-if="isVisited">
+		<hi-column-chart data="firstInningRuns" fetched="isFetched" category="years"></hi-column-chart>
+		 
+
+
+	</div>
+	
+	<div ui-view="batting" ></div>
+	
 </div>

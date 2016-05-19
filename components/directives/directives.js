@@ -7,15 +7,30 @@ angular.module('sachinStats')
                     template: '<div></div>',
                     replace:true,
                     scope: {
-                        options: '=',
-                        fetched:'=fetched'
+                        category: '=',
+                        fetched:'=fetched',
+                        data:'=',
+                        heading:'@'
+
                     },
                     link: function (scope, element) {
                          scope.$watch('fetched', function(newValue, oldValue) {
                             
                               if (newValue !== oldValue) {
                                  if(scope.fetched){
-                                    Highcharts.chart(element[0], scope.options);
+                                    Highcharts.chart(element[0],{
+                                        title: {
+                                            text: scope.heading
+                                        },
+                                        xAxis: {
+                                            categories: scope.category
+                                        },
+
+                                        series: [{
+                                            data: scope.data
+                                        }]
+
+                                    });
                                     }
                               }
                           }, true);

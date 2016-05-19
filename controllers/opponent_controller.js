@@ -1,31 +1,41 @@
 angular.module('sachinStats')
 .controller('opponentController', ['$scope', '$state','dataFactory', function ($scope, $state,dataFactory) {
     $scope.isFetched=false;
-    $scope.pieData=[];
-    $scope.runs=[];
-    $scope.countries=[];
+    $scope.opponentStats=[];
+    $scope.wicketsStats=[];
     
-     $scope.showBattingStats=function(){
+    
+    $scope.showBattingStats=function(){
         $state.go('home.opponent.batting');
-        
+        $scope.isVisited=false;
     }
     $scope.showBowlingStats=function(){
         $state.go('home.opponent.bowling');
-        
+        $scope.isVisited=false;
     }
-    
+    $scope.isVisited=true;
      
    
 
-    $scope.prepareGraphData=function(){
-      
-                angular.forEach($scope.countries,function(item,key){
-                    var obj = {
-                    name: $scope.countries[key],
-                    y: $scope.runs[key]
-                  };
-                  $scope.pieData.push(obj);// Sample data for pie chart
+    $scope.prepareGraphData=function(array){
+                var pieData=[]
+                var isCountry=false;
+                angular.forEach(array,function(item,key){
+                     if(key=='2012'||key=='Australia'){
+                            isCountry=true
+                        }
+                        if(!isCountry){
+                            var obj = {
+                                name: key,
+                                y: item
+                              };
+                            pieData.push(obj);// Sample data for pie chart
+                        }
+                        
+                    
+                  
                 });
+                console.log(pieData);
     };
 
     $scope.runsAgainstOpponent=function(parsedData){
@@ -41,7 +51,57 @@ angular.module('sachinStats')
 
             return obj
         });
-        return oppWiseRunsObj;
+        var pieData=[];
+        var isCountry=false;
+        angular.forEach(oppWiseRunsObj,function(item,key){
+            if(key=='Australia'){
+                isCountry=true
+            }
+            if(isCountry){
+                var obj = {
+                    name: key,
+                    y: item
+                };
+                pieData.push(obj);// Sample data for pie chart
+            }
+                        
+                    
+                  
+        });
+        return pieData;
+        
+    };
+    $scope.wicketsAgainstOpponent=function(parsedData){
+        var oppWiseWicketsObj = parsedData.reduce(function (obj, el) {
+            var countries = el.date.slice(-4);
+            var wickets = parseInt(el.wickets);
+            
+            obj[countries] = obj[countries] || 0
+               
+            if (wickets) {
+                obj[countries] += wickets
+            }
+            
+            return obj
+        });
+        var pieData=[];
+        var isCountry=false;
+        angular.forEach(oppWiseWicketsObj,function(item,key){
+            if(key=='2012'){
+                isCountry=true
+            }
+            if(!isCountry){
+                var obj = {
+                    name: key,
+                    y: item
+                };
+                pieData.push(obj);// Sample data for pie chart
+            }
+                        
+                    
+                  
+        });
+        return pieData;
         
     };
                 
@@ -53,20 +113,11 @@ angular.module('sachinStats')
                                         }).data;
                     $scope.isFetched=true;//to confirm that data is fetched and  can be used in directive
                     
-                    var opponent=$scope.runsAgainstOpponent(sachinData);
-                    var isCountry=false;
-                    angular.forEach(opponent,function(item,key){
-
-                        if(key=='Australia'){
-                            isCountry=true
-                        }
-                        if(isCountry){
-                            $scope.countries.push(key);
-                            $scope.runs.push(item);
-                        }
-                        
-                    });
-                    $scope.prepareGraphData();
+                    $scope.opponentStats=$scope.runsAgainstOpponent(sachinData);
+                    console.log($scope.opponentStats);
+                    
+                    $scope.wicketsStats=$scope.wicketsAgainstOpponent(sachinData);
+                    
                 
                 },function(error){
                   console.log(error);
