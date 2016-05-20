@@ -17,21 +17,43 @@
   $scope.$on('$viewContentLoaded', function (){
     $scope.$broadcast ('viewContentLoaded');
   });
-
+  $scope.highlightBatting=false;
+  $scope.highlightRunsPerYear=false;
+  $scope.highlightOpponent=false;
+  $scope.highlightCenturies=false;
   $scope.goToBattingStats = function(){
+    $scope.highlightBatting=true;
     $state.go('home.batting');
     
+    $scope.highlightRunsPerYear=false;
+    $scope.highlightOpponent=false;
+    $scope.highlightCenturies=false;
   };
   $scope.goToRunsPerYearStats = function(){
     $state.go('home.runsPerYear');
+    $scope.highlightRunsPerYear=true;
+    $scope.highlightBatting=false;
+    
+    $scope.highlightOpponent=false;
+    $scope.highlightCenturies=false;
     
   };
   $scope.goToOpponentStats = function(){
     $state.go('home.opponent');
+    $scope.highlightOpponent=true;
+    $scope.highlightBatting=false;
+    $scope.highlightRunsPerYear=false;
     
+    $scope.highlightCenturies=false;
+      
   };
   $scope.goToCenturiesStats = function(){
     $state.go('home.centuries');
+    $scope.highlightCenturies=true;
+    $scope.highlightBatting=false;
+    $scope.highlightRunsPerYear=false;
+    $scope.highlightOpponent=false;
+    
     
   };
   

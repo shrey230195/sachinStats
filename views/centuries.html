@@ -1,10 +1,13 @@
 
 <div ng-controller="centuriesController">
 	<div class="row opponent">
-		<div class="col-md-6" ng-click="showHalfCenturies()" >
+		<div class="col-md-12">
+			<h1>50/100 per year</h1>
+		</div>
+		<div class="col-md-6" ng-click="showHalfCenturies()" ng-class="{highlight:!highlightTab}" >
 			<h2>50</h2>
 		</div>
-		<div class="col-md-6" ng-click="showFullCenturies()">
+		<div class="col-md-6" ng-click="showFullCenturies()" ng-class="{highlight:highlightTab}">
 			<h2>100</h2>
 		</div>
 		

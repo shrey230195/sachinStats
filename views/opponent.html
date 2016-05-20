@@ -1,9 +1,9 @@
 <div ng-controller="opponentController">
 	<div class="row opponent">
-		<div class="col-md-6" ng-click="showBattingStats()" >
+		<div class="col-md-6" ng-click="showBattingStats()" ng-class="{highlight:highlightTab}" >
 			<h2>Runs</h2>
 		</div>
-		<div class="col-md-6" ng-click="showBowlingStats()">
+		<div class="col-md-6" ng-click="showBowlingStats()" ng-class="{highlight:!highlightTab}">
 			<h2>wickets</h2>
 		</div>
 		

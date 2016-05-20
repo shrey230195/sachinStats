@@ -8,14 +8,16 @@ angular.module('sachinStats')
   $scope.totalFirstInningsYearly=[];
   $scope.totalSecondInningsYearly=[];
   $scope.secondInningRuns=[];
-
+  $scope.firstInning = true;
    $scope.showFirstInning=function(){
         $state.go('home.batting.first');
         $scope.isVisited=false;
+        $scope.firstInning=true
     }
     $scope.showSecondInning=function(){
         $state.go('home.batting.second');
         $scope.isVisited=false;
+        $scope.firstInning=false;
     }
     $scope.isVisited=true;
 

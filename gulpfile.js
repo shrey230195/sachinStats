@@ -205,7 +205,7 @@ gulp.task('templates', function() {
     ])
     .pipe($.minifyHtml())
     .pipe($.angularTemplatecache({
-      module: 'boilerplate'
+      module: 'sachinStats'
     }))
     .pipe(gulp.dest('_build/js'));
 });
@@ -260,7 +260,7 @@ gulp.task('default', ['browser-sync', 'sass', 'minify-css'], function() {
 gulp.task('build', function(callback) {
   runSequence(
     'clean:build',
-    'sass:build',
+    
     'images',
     'templates',
     'usemin',

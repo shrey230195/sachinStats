@@ -4,13 +4,16 @@ angular.module('sachinStats')
     $scope.years=[];
     $scope.yearWiseCenturies=[];
     $scope.yearWiseHalfCenturies=[];
+    $scope.highlightTab=true;
      $scope.showHalfCenturies=function(){
         $state.go('home.centuries.half');
         $scope.isVisited=false;
+        $scope.highlightTab=false;
     }
     $scope.showFullCenturies=function(){
         $state.go('home.centuries.full');
         $scope.isVisited=false;
+        $scope.highlightTab=true;
     }
     $scope.isVisited=true;
 

@@ -3,15 +3,18 @@ angular.module('sachinStats')
     $scope.isFetched=false;
     $scope.opponentStats=[];
     $scope.wicketsStats=[];
-    
+    $scope.highlightTab=true;
+
     
     $scope.showBattingStats=function(){
         $state.go('home.opponent.batting');
         $scope.isVisited=false;
+        $scope.highlightTab=true;
     }
     $scope.showBowlingStats=function(){
         $state.go('home.opponent.bowling');
         $scope.isVisited=false;
+        $scope.highlightTab=false;
     }
     $scope.isVisited=true;
      

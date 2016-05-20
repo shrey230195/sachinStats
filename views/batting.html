@@ -5,10 +5,10 @@
 		<div class="col-md-12">
 			<h2>Batting Avg Per Innings</h2>
 		</div>
-		<div class="col-md-6" ng-click="showFirstInning()" >
+		<div class="col-md-6" ng-click="showFirstInning()" ng-class="{highlight:firstInning}">
 			<h2>first Inning</h2>
 		</div>
-		<div class="col-md-6" ng-click="showSecondInning()">
+		<div class="col-md-6" ng-click="showSecondInning()" ng-class="{highlight:!firstInning}">
 			<h2>second Inning</h2>
 		</div>
 		
